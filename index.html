@@ -1,0 +1,24 @@
+<script>
+
+function submit(){
+
+var input = document.getElementById("list").value;
+
+var pairs = input.split("\n");
+
+//document.getElementById("output").innerHTML = input;
+
+document.getElementById("output").innerHTML = pairs.toString();
+
+}
+
+</script>
+
+<h1> Rank Pair </h1>
+<textarea id="list" rows="4" cols="50">
+
+</textarea>
+<br>
+<button onclick="submit();"> Submit </button>
+
+<p id="output"></p>
