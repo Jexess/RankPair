@@ -1,23 +1,65 @@
 <script>
-
-
-function submit(){
-
-var input = document.getElementById("list").value;
-
-var pairs = input.split("\n");
-
-
-
-document.getElementById("output").innerHTML = pairs.toString();
+//Creating an Object
+function rankList(name) {
+  this.name = name;
+  this.items = new Array();
+ 
+  this.print = function() {
+        
+	this.items.forEach(function(element){
+      element.print();
+	  
+	  });
+	
+	
+		
+  }
 
 }
+
+function item(name) {
+	//declaring variables
+    this.name = name;
+	this.score = 0;
+	this.ranks = 0;
+	this.lastRanked = 0;
+	
+	this.print = function() {
+		//alert("hi");
+       document.getElementById("output").innerHTML += "<div>"+
+	   "<p>Name: "+this.name+"</p>"+
+       "<p>Score: "+this.score+"</p>"+
+	   "<p>Times Ranked: "+this.ranks+"</p>"+
+	   "<p>Date Last Ranked: "+this.lastRanked+"</p>"+
+	   "</div>";
+    }
+	
+} 
+
+function submit(){
+  var input = document.getElementById("list").value;
+  var pairs = input.split("\n");
+  //document.getElementById("output").innerHTML = pairs.toString();
+  var firstList = new rankList();
+  
+  
+  pairs.forEach(function(element,index){
+  firstList.items[index] = new item(element);
+  });
+  
+  firstList.print();
+  
+}
+
+
 
 </script>
 
 <h1> Rank Pair </h1>
 <textarea id="list" rows="4" cols="50">
-
+1
+2
+3
 </textarea>
 <br>
 <button onclick="submit();"> Submit </button>
