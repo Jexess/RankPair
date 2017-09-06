@@ -8,15 +8,14 @@ function submit(){
 
 var input = document.getElementById("list").value;
 var pairs = input.split("\n");
-var pairList = localStorage.getItem("rankPair",);
-
-
+var pairList = localStorage.getItem("rankPair");
 
 document.getElementById("output").innerHTML = pairs.toString();
+localStorage.setItem("rankPair"," ");
 
 if (typeof(Storage) !== "undefined") {
 	if (localStorage.rankPair){
-		// Store		
+		// Store
 		localStorage.setItem("rankPair", pairs + pairList);
 		
 		// Retrieve
@@ -34,9 +33,6 @@ if (typeof(Storage) !== "undefined") {
 }
 }
 
-//function clear(){
-
-	//}
 </script>
 
 <h1> Rank Pair </h1>
@@ -48,15 +44,12 @@ if (typeof(Storage) !== "undefined") {
 
 <p id="output"></p>
 
-<p>Stored Information:</p> <div id="result"></div>
+<p>Stored Information:</p> 
+
+<div id="result"></div>
 
 <br>
 <button onclick="test();"> Submit </button>
-
-<br>
-<button onclick="clear();"> Clear </button>
-
-
 
 </body>
 </html>
