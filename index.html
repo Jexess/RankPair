@@ -1,18 +1,42 @@
-<script>
+<!DOCTYPE html>
+<html>
+<body>
 
+<script>
 
 function submit(){
 
 var input = document.getElementById("list").value;
-
 var pairs = input.split("\n");
+var pairList = localStorage.getItem("rankPair",);
 
 
 
 document.getElementById("output").innerHTML = pairs.toString();
 
+if (typeof(Storage) !== "undefined") {
+	if (localStorage.rankPair){
+		// Store		
+		localStorage.setItem("rankPair", pairs + pairList);
+		
+		// Retrieve
+		document.getElementById("result").innerHTML = localStorage.getItem("rankPair");
+	}
+}
 }
 
+function test(){
+if (typeof(Storage) !== "undefined") {
+	if (localStorage.rankPair){		
+		// Retrieve
+		document.getElementById("result").innerHTML = localStorage.getItem("rankPair");
+	}
+}
+}
+
+//function clear(){
+
+	//}
 </script>
 
 <h1> Rank Pair </h1>
@@ -20,6 +44,19 @@ document.getElementById("output").innerHTML = pairs.toString();
 
 </textarea>
 <br>
-<button onclick="submit();"> Submit </button>
+<p>Pairs:</p> <button onclick="submit();"> Submit </button>
 
 <p id="output"></p>
+
+<p>Stored Information:</p> <div id="result"></div>
+
+<br>
+<button onclick="test();"> Submit </button>
+
+<br>
+<button onclick="clear();"> Clear </button>
+
+
+
+</body>
+</html>
