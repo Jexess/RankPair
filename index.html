@@ -1,5 +1,6 @@
 <script>
 //List object
+var list;
 function rankList(name) {
   this.name = name;
   this.items = new Array();
@@ -49,11 +50,11 @@ function submit(){
   });
   
   firstList.print();
-  
+  return firstList;
 }
 
 function rank(){
-	
+	alert(list.items.length);
 }
 
 
@@ -68,7 +69,7 @@ Pear
 grapes
 </textarea>
 <br>
-<button onclick="submit();"> Submit </button><br><br>
+<button onclick="list = submit();"> Submit </button><br><br>
 <button onclick="rank();"> Rank </button><br>
 <button id="first" onclick="first();">First</button>
 <button id="second" onclick="second();">Second</button>
