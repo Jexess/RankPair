@@ -1,13 +1,14 @@
 <script>
-//Creating an Object
+//List object
 function rankList(name) {
   this.name = name;
   this.items = new Array();
  
   this.print = function() {
-        
+        document.getElementById("output").innerHTML = "";
 	this.items.forEach(function(element){
-      element.print();
+       
+	   document.getElementById("output").innerHTML += element.print();
 	  
 	  });
 	
@@ -16,7 +17,7 @@ function rankList(name) {
   }
 
 }
-
+// items to be ranked
 function item(name) {
 	//declaring variables
     this.name = name;
@@ -26,12 +27,12 @@ function item(name) {
 	
 	this.print = function() {
 		//alert("hi");
-       document.getElementById("output").innerHTML += "<div>"+
+       return ("<div>"+
 	   "<p>Name: "+this.name+"</p>"+
        "<p>Score: "+this.score+"</p>"+
 	   "<p>Times Ranked: "+this.ranks+"</p>"+
 	   "<p>Date Last Ranked: "+this.lastRanked+"</p>"+
-	   "</div>";
+	   "</div>");
     }
 	
 } 
@@ -51,6 +52,9 @@ function submit(){
   
 }
 
+function rank(){
+	
+}
 
 
 </script>
@@ -64,6 +68,9 @@ Pear
 grapes
 </textarea>
 <br>
-<button onclick="submit();"> Submit </button>
-
+<button onclick="submit();"> Submit </button><br><br>
+<button onclick="rank();"> Rank </button><br>
+<button id="first" onclick="first();">First</button>
+<button id="second" onclick="second();">Second</button>
+<button onclick="tie();">Tie</button>
 <p id="output"></p>
