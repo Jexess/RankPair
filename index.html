@@ -1,6 +1,8 @@
 <script>
 //List object
 var list;
+var five = 5;
+
 function rankList(name) {
   this.name = name;
   this.items = new Array();
@@ -46,11 +48,40 @@ function submit(){
   
   
   pairs.forEach(function(element,index){
-  firstList.items[index] = new item(element);
+	firstList.items[index] = new item(element);
   });
   
   firstList.print();
+  var myJSON;
+  myJSON = JSON.stringify(firstList.items);
+  localStorage.setItem("testJSON", myJSON);
   return firstList;
+}
+
+function pullArray(){
+	var testJSON;
+	
+	test = localStorage.getItem("testJSON");
+	text = JSON.parse(test);
+	//alert(text[1].name);
+	var firstList = new rankList();
+	
+	text.forEach(function(element,index){
+	firstList.items[index] = new item(text[index].name);
+	firstList.items[index].score = text[index].score;
+	firstList.items[index].ranks = text[index].ranks;
+	firstList.items[index].lastRanked = text[index].lastRanked;
+	
+	});
+	
+	
+	//firstList.items = text;
+
+	
+	//document.getElementById("output").innerHTML = text;
+	//text.item.print();
+	firstList.print();
+	
 }
 
 function rank(){
@@ -77,6 +108,7 @@ Grapes</textarea>
 <br>
 <button onclick="list = submit();"> Submit </button><br><br>
 <button onclick="rank();"> Rank </button><br>
+<button onclick="pullArray();"> Pull Array </button><br>
 <button id="first" onclick="first();">First</button>
 <button id="second" onclick="second();">Second</button>
 <button onclick="tie();">Tie</button>
