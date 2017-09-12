@@ -81,7 +81,7 @@ function pullArray(){
 	//document.getElementById("output").innerHTML = text;
 	//text.item.print();
 	firstList.print();
-	
+	return firstList;
 }
 
 function rank(){
@@ -109,7 +109,7 @@ grapes</textarea>
 <br>
 <button onclick="list = submit();"> Submit </button><br><br>
 <button onclick="rank();"> Rank </button><br>
-<button onclick="pullArray();"> Pull Array </button><br>
+<button onclick="list = pullArray();"> Pull Array </button><br>
 <button id="first" onclick="first();">First</button>
 <button id="second" onclick="second();">Second</button>
 <button onclick="tie();">Tie</button>
