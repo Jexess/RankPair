@@ -3,7 +3,7 @@ var list;
 var five = 5;
 
 
-///vars for keeping track of current pairs
+//vars for keeping track of current pairs
 var listItem0=0;
 var listItem1=0;
 
