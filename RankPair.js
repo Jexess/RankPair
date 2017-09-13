@@ -1,7 +1,8 @@
 //List object
 var list;
 var five = 5;
-var d = new Date().get;
+
+
 
 //vars for keeping track of current pairs
 var listItem0=0;
@@ -28,6 +29,7 @@ function item(name) {
 	this.score = 0;
 	this.ranks = 0;
 	this.lastRanked = 0;
+	this.cv = 0;
 	
 	///Display list
 	this.print = function() {
@@ -36,6 +38,7 @@ function item(name) {
        "<td>"+this.score+"</td>"+
 	   "<td>"+this.ranks+"</td>"+
 	   "<td>"+this.lastRanked+"</td>"+
+	   "<td>"+this.cv+"</td>"+
 	   "</tr>");
     }
 	
@@ -57,6 +60,7 @@ function submit(){
   var myJSON;
   myJSON = JSON.stringify(firstList.items);
   localStorage.setItem("testJSON", myJSON);
+
   //Returns the list
   return firstList;
 }
@@ -90,20 +94,34 @@ function pullArray(){
 
 function SelectFirst()
 {
- list.items[listItem0].score=list.items[listItem1].score+1;
- rank()
- 
- list.items[listItem0].lastRanked=d.getTime();
- save()
+	var time = new Date().getTime();
+	var date = new Date(time);
+	
+	list.items[listItem0].score=list.items[listItem1].score+1;
+	list.items[listItem1].lastRanked=date.toString();
+	list.items[listItem0].lastRanked=date.toString();
+	
+	list.items[listItem0].ranks += 1;
+	list.items[listItem1].ranks += 1;
+	
+	rank();
+	save();
 }
 
 function SelectSecond()
 {
- list.items[listItem1].score=list.items[listItem0].score+1;
- rank()
- 
-  list.items[listItem1].lastRanked=d.getTime();
- save()
+	var time = new Date().getTime();
+	var date = new Date(time);
+	
+	list.items[listItem1].score=list.items[listItem0].score+1;
+	list.items[listItem1].lastRanked=date.toString();
+	list.items[listItem0].lastRanked=date.toString();
+	
+	list.items[listItem0].ranks += 1;
+	list.items[listItem1].ranks += 1;
+	
+	rank();
+	save();
 }
 
 function rank(){
@@ -117,15 +135,15 @@ list.items.sort(function (a, b) {
 	first = Math.floor(Math.random() * list.items.length);
 	second = Math.floor(Math.random() * list.items.length);
 	
-	listItem0=first;
-	listItem1=second;
-	
 	do {second = Math.floor(Math.random() * list.items.length);
 	} while(first == second)
 	document.getElementById("first").innerHTML = list.items[first].name;
 	document.getElementById("second").innerHTML =  list.items[second].name;
 	//document.getElementById("lblFirst").innerHTML = list.items[first].name;
 //	document.getElementById("lblSecond").innerHTML= list.items[second].name;
+		
+	listItem0=first;
+	listItem1=second;
 		
 		list.print();
 		
