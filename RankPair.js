@@ -61,6 +61,12 @@ function submit(){
   return firstList;
 }
 
+function save(){
+	var myJSON;
+	myJSON = JSON.stringify(list.items);
+	localStorage.setItem("testJSON", myJSON);
+}
+
 // Loads the array from local storage
 function pullArray(){
 	var testJSON;
@@ -86,12 +92,16 @@ function SelectFirst()
 {
  list.items[listItem0].score=list.items[listItem1].score+1;
  rank()
+ 
+ save()
 }
 
 function SelectSecond()
 {
  list.items[listItem1].score=list.items[listItem0].score+1;
  rank()
+ 
+ save()
 }
 
 function rank(){
