@@ -1,7 +1,7 @@
 //List object
 var list;
 var five = 5;
-
+var d = new Date().get;
 
 //vars for keeping track of current pairs
 var listItem0=0;
@@ -93,6 +93,7 @@ function SelectFirst()
  list.items[listItem0].score=list.items[listItem1].score+1;
  rank()
  
+ list.items[listItem0].lastRanked=d.getTime();
  save()
 }
 
@@ -101,6 +102,7 @@ function SelectSecond()
  list.items[listItem1].score=list.items[listItem0].score+1;
  rank()
  
+  list.items[listItem1].lastRanked=d.getTime();
  save()
 }
 
@@ -115,6 +117,9 @@ list.items.sort(function (a, b) {
 	first = Math.floor(Math.random() * list.items.length);
 	second = Math.floor(Math.random() * list.items.length);
 	
+	listItem0=first;
+	listItem1=second;
+	
 	do {second = Math.floor(Math.random() * list.items.length);
 	} while(first == second)
 	document.getElementById("first").innerHTML = list.items[first].name;
@@ -124,7 +129,6 @@ list.items.sort(function (a, b) {
 		
 		list.print();
 		
-	listItem0=first;
-	listItem1=second;
+
 	
 }
