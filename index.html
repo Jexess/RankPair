@@ -1,103 +1,7 @@
- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script>
-//List object
-var list;
-var five = 5;
 
-function rankList(name) {
-  this.name = name;
-  this.items = new Array();
- 
-  this.print = function() {
-        document.getElementById("output").innerHTML = "";
-	this.items.forEach(function(element){
-       
-	   document.getElementById("output").innerHTML += element.print();
-	  
-	  });
-	
-	
-		
-  }
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-}
-// items to be ranked
-function item(name) {
-	//declaring variables
-    this.name = name;
-	this.score = 0;
-	this.ranks = 0;
-	this.lastRanked = 0;
-	
-	this.print = function() {
-		//alert("hi");
-       return ("<div>"+
-	   "<p>Name: "+this.name+"</p>"+
-       "<p>Score: "+this.score+"</p>"+
-	   "<p>Times Ranked: "+this.ranks+"</p>"+
-	   "<p>Date Last Ranked: "+this.lastRanked+"</p>"+
-	   "</div>");
-    }
-	
-} 
-
-function submit(){
-  var input = document.getElementById("list").value;
-  var pairs = input.split("\n");
-  //document.getElementById("output").innerHTML = pairs.toString();
-  var firstList = new rankList();
-  
-  
-  pairs.forEach(function(element,index){
-	firstList.items[index] = new item(element);
-  });
-  
-  firstList.print();
-  var myJSON;
-  myJSON = JSON.stringify(firstList.items);
-  localStorage.setItem("testJSON", myJSON);
-  return firstList;
-}
-
-function pullArray(){
-	var testJSON;
-	
-	test = localStorage.getItem("testJSON");
-	text = JSON.parse(test);
-	//alert(text[1].name);
-	var firstList = new rankList();
-	
-	text.forEach(function(element,index){
-	firstList.items[index] = new item(text[index].name);
-	firstList.items[index].score = text[index].score;
-	firstList.items[index].ranks = text[index].ranks;
-	firstList.items[index].lastRanked = text[index].lastRanked;
-	
-	});
-	
-	
-	//firstList.items = text;
-
-	
-	//document.getElementById("output").innerHTML = text;
-	//text.item.print();
-	firstList.print();
-	return firstList;
-}
-
-function rank(){
-	first = Math.floor(Math.random() * list.items.length);
-	second = Math.floor(Math.random() * list.items.length);
-	
-	do {second = Math.floor(Math.random() * list.items.length);
-	} while(first == second)
-
-	document.getElementById("first").innerHTML = list.items[first].name;
-	document.getElementById("second").innerHTML =  list.items[second].name;
-}
-
-
-</script>
+<script src="RankPair.js"></script>
 
 <h1> Rank Pair </h1>
 <textarea id="list" rows="4" cols="50">
@@ -107,24 +11,15 @@ Banana
 Pear
 grapes</textarea>
 
-<<<<<<< HEAD
-=======
-</textarea>
-
-
-<button onclick="killPage">
-Button1
-</button>
-
-
-
->>>>>>> Logan
 <br>
 <button onclick="list = submit();"> Submit </button><br><br>
 <button onclick="rank();"> Rank </button><br>
 <button onclick="list = pullArray();"> Pull Array </button><br>
-<button id="first" onclick="first();">First</button>
-<button id="second" onclick="second();">Second</button>
+<p id="lblFirst" text="" ></p>
+<p id="lblSecond" text="" ></p>
+<br>
+<button id="first" onclick="SelectFirst();">First</button>
+<button id="second" onclick="SelectSecond();">Second</button>
 <button onclick="tie();">Tie</button>
 <p id="output"></p>
 
