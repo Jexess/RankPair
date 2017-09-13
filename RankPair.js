@@ -31,12 +31,12 @@ function item(name) {
 	
 	///Display list
 	this.print = function() {
-       return ("<div>"+
-	   "<p>Name: "+this.name+"</p>"+
-       "<p>Score: "+this.score+"</p>"+
-	   "<p>Times Ranked: "+this.ranks+"</p>"+
-	   "<p>Date Last Ranked: "+this.lastRanked+"</p>"+
-	   "</div>");
+       return ("<tr>"+
+	   "<td>"+this.name+"</td>"+
+       "<td>"+this.score+"</td>"+
+	   "<td>"+this.ranks+"</td>"+
+	   "<td>"+this.lastRanked+"</td>"+
+	   "</tr>");
     }
 	
 } 
