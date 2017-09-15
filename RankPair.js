@@ -51,6 +51,11 @@ function item(name) {
 
 function handleSubmitBtn()
 {
+
+var input = document.getElementById("list").value;
+var pairs = input.split("\n");
+if(pairs.length>1)
+{
 	if(!btnHit)
 	{
 		list=submit();
@@ -63,7 +68,14 @@ function handleSubmitBtn()
 		addToList();
 		rank();
 	}
-	
+
+}
+
+	else
+	{
+		alert("YOU CAN'T ENTER LESS THAN TWO ITEMS WWHAT THE FUCK DO YOU THINK YOU'RE DEOING YOU FICUKING PIECE OF SHAT!");
+	}
+
 }
 
 
