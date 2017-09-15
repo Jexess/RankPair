@@ -1,33 +1,43 @@
-<script>
-//Justin Pryor
-function submit(){
 
-var input = document.getElementById("list").value;
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-var pairs = input.split("\n");
-
-//document.getElementById("output").innerHTML = input;
-
-document.getElementById("output").innerHTML = pairs.toString();
-//Logan the Worst
-//Here I'm adding Jesse's name for him
-}
-
-</script>
+<script src="RankPair.js"></script>
 
 <h1> Rank Pair </h1>
 <textarea id="list" rows="4" cols="50">
-
-</textarea>
-
-
-<button onclick="killPage">
-Button1
-</button>
-
-
+Apple
+Orange
+Banana
+Pear
+grapes</textarea>
 
 <br>
-<button onclick="submit();"> Submit </button>
+<button onclick="handleSubmitBtn();"> Submit </button><br>
+<button onclick="list = pullArray();"> Pull Array </button><br>
+<p id="lblFirst" text="" ></p>
+<p id="lblSecond" text="" ></p>
+<br>
+<button id="first" onclick="SelectFirst();">First</button>
+<button id="second" onclick="SelectSecond();">Second</button>
+<button onclick="tie();">Tie</button>
+<!-- <p id="output"></p> -->
+<br><br>
+ <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Score</th>
+                  <th># Of Ranks</th>
+                  <th>Last Ranked</th>
+				  <th>CV</th>
+                </tr>
+              </thead>
+			  <tbody id="output">
+			  
+			  </tbody>
+			</table>
 
-<p id="output"></p>
+<script src="tether/dist/js/tether.js"></script>
+<script src="jquery/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
