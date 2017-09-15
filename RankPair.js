@@ -54,7 +54,7 @@ function handleSubmitBtn()
 
 var input = document.getElementById("list").value;
 var pairs = input.split("\n");
-if(pairs.length>1)
+if(pairs.length>1 || btnHit)
 {
 	if(!btnHit)
 	{
