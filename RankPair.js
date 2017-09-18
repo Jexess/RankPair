@@ -1,14 +1,10 @@
 //List object
 var list;
-var five = 5;
 
+//Used to keep track of the submit button
+var btnHit=false;
 
-
-//vars for keeping track of current pairs
-var listItem0=0;
-var listItem1=0;
-
-
+//
 function rankList(name) {
   this.name = name;
   this.items = new Array();
@@ -21,6 +17,7 @@ function rankList(name) {
 	  });	
   }
 }
+
 
 // items to be ranked
 function item(name) {
@@ -38,11 +35,70 @@ function item(name) {
        "<td>"+this.score+"</td>"+
 	   "<td>"+this.ranks+"</td>"+
 	   "<td>"+this.lastRanked+"</td>"+
-	   "<td>"+this.cv+"</td>"+
+	   "<td>"+this.cv.toLocaleString()+"</td>"+
+	   
 	   "</tr>");
     }
 	
 } 
+
+
+//send you to the submit or add list after hitting the submit button
+function handleSubmitBtn()
+{
+
+var input = document.getElementById("list").value;
+var pairs = input.split("\n");
+if(pairs.length>1 || btnHit)
+{
+	if(!btnHit)
+	{
+		list=submit();
+		rank();
+		btnHit=true;
+	}
+	else
+	{
+		//alert("this");
+		addToList();
+		rank();
+	}
+
+}
+
+	else
+	{
+		alert("YOU CAN'T ENTER LESS THAN TWO ITEMS WWHAT THE FUCK DO YOU THINK YOU'RE DEOING YOU FICUKING PIECE OF SHAT!");
+	}
+
+}
+
+
+//Adds to the current list
+function addToList()
+{
+	
+	var input = document.getElementById("list").value;
+	var pairs = input.split("\n");
+	var firstList = new rankList();
+	// Put individual pairs into object array
+	pairs.forEach(function(element,index){
+	//firstList.items[index] = new item(element);
+	list.items[list.items.length+index]=new item(element );
+  });
+  
+  
+  //Display the list
+  //firstList.print();
+  // Stores array into local storage
+  var myJSON;
+  myJSON = JSON.stringify(list.items);
+  localStorage.setItem("testJSON", myJSON);
+
+
+	
+}
+
 
 // Submit List to array and puts it into local storage
 function submit(){
@@ -65,14 +121,19 @@ function submit(){
   return firstList;
 }
 
+
+//
 function save(){
 	var myJSON;
 	myJSON = JSON.stringify(list.items);
 	localStorage.setItem("testJSON", myJSON);
 }
 
+
 // Loads the array from local storage
 function pullArray(){
+	btnHit=true;
+	
 	var testJSON;
 	test = localStorage.getItem("testJSON");
 	text = JSON.parse(test);
@@ -92,61 +153,105 @@ function pullArray(){
 }
 
 
-function SelectFirst()
-{
+
+function SelectFirst(){	
+	
+	//Gets the time and converts to a string format
 	var time = new Date().getTime();
 	var date = new Date(time);
 	
-	list.items[listItem0].score=list.items[listItem1].score+1;
-	list.items[listItem1].lastRanked=date.toString();
-	list.items[listItem0].lastRanked=date.toString();
+	cv();
 	
-	list.items[listItem0].ranks += 1;
-	list.items[listItem1].ranks += 1;
+	//Increases score of the winning object if it has a lower score
+	if(list.items[0].score <= list.items[1].score){
+		//alert(list.items[0].score + " " + list.items[1].score )
+		list.items[0].score = list.items[1].score+1
+	}
+
+	//Gives each ranked item its data
+	list.items[1].lastRanked=date;
+	list.items[0].lastRanked=date;
 	
+	//Increases times ranked for each object
+	list.items[1].ranks += 1;
+	list.items[0].ranks += 1;
+	
+	//
+		
 	rank();
 	save();
 }
 
-function SelectSecond()
-{
+
+function SelectSecond(){
+	
+	//Gets the time and converts to a string format
 	var time = new Date().getTime();
 	var date = new Date(time);
+
+	cv();
 	
-	list.items[listItem1].score=list.items[listItem0].score+1;
-	list.items[listItem1].lastRanked=date.toString();
-	list.items[listItem0].lastRanked=date.toString();
+	//Increases score of the winning object if it has a lower score
+	if(list.items[1].score <= list.items[0].score){
+		//alert(list.items[1].score + " " + list.items[0].score )
+		list.items[1].score=list.items[0].score+1
+
+	};
 	
-	list.items[listItem0].ranks += 1;
-	list.items[listItem1].ranks += 1;
+	//Gives each ranked item its data
+	list.items[1].lastRanked=date;
+	list.items[0].lastRanked=date;
 	
+	//Increases times ranked for each object
+	list.items[1].ranks += 1;
+	list.items[0].ranks += 1;
+		
 	rank();
 	save();
 }
 
-function rank(){
-//added
-list.items.sort(function (a, b) {
-  return b.score - a.score;
-});
+
+//Calculates the CV value and puts it into the array
+function cv(){
+	var first
+	var second
+	//Calculated Value
+	list.items[0].cv = list.items[0].ranks * (list.items[0].lastRanked / 10000000);
+	list.items[1].cv = list.items[1].ranks * (list.items[1].lastRanked / 10000000);
 	
+	//Sorting from least to greatest
+	
+	list.items.sort(function (a, b) {
+	return a.cv - b.cv;
+	});
+	
+	//Puts the top two values into the variables
+	first = list.items[0].cv;
+	second = list.items[1].cv;
+	
+	document.getElementById("test").innerHTML = first
+	
+}	
+
+
 //
-
-	first = Math.floor(Math.random() * list.items.length);
-	second = Math.floor(Math.random() * list.items.length);
+function rank(){
 	
-	do {second = Math.floor(Math.random() * list.items.length);
-	} while(first == second)
-	document.getElementById("first").innerHTML = list.items[first].name;
-	document.getElementById("second").innerHTML =  list.items[second].name;
-	//document.getElementById("lblFirst").innerHTML = list.items[first].name;
-//	document.getElementById("lblSecond").innerHTML= list.items[second].name;
-		
-	listItem0=first;
-	listItem1=second;
-		
-		list.print();
-		
-
+	cv();
 	
+	//first = Math.floor(Math.random() * list.items.length);
+	document.getElementById("first").innerHTML = list.items[0].name;
+	
+	//second = Math.floor(Math.random() * list.items.length);
+	document.getElementById("second").innerHTML =  list.items[1].name;
+	
+	//Calculates the CV value and puts it into the array		
+	
+	list.items.sort(function (a, b) {
+	return b.score - a.score;
+	});	
+	
+	list.print();
+	
+
 }
